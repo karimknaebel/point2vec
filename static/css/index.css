@@ -87,6 +87,7 @@ p {
 
 nav {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   gap: 16px;
   margin-top: 32px;
@@ -105,6 +106,14 @@ nav a {
 nav a:hover {
   background: #292929;
   text-decoration: none;
+}
+
+nav .icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
 }
 
 section {

@@ -163,10 +163,6 @@ pre {
   position: relative;
 }
 
-.bibtex-wrapper pre {
-  padding-top: 48px;
-}
-
 .copy-button {
   position: absolute;
   top: 10px;

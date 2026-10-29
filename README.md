@@ -182,7 +182,7 @@ If you use point2vec in your research, please use the following BibTeX entry.
 
 ```bibtex
 @inproceedings{knaebel2023point2vec,
-    title     = {point2vec for Self-Supervised Representation Learning on Point Clouds},
+    title     = {{point2vec} for Self-Supervised Representation Learning on Point Clouds},
     author    = {Knaebel, Karim and Schult, Jonas and Hermans, Alexander and Leibe, Bastian},
     year      = 2023,
     booktitle = {German Conference on Pattern Recognition (GCPR)},

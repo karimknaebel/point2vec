@@ -36,7 +36,7 @@ python -m point2vec.datasets.process.check # check if datasets are complete
 
 | Type                         | Dataset      | Evaluation                          | Config                                                                                       | Checkpoint                                                                                                                                    |
 | ---------------------------- | ------------ | ----------------------------------- | -------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| Point2vec pre-trained        | ShapeNet     | -                                   | [config](configs/pretraining/shapenet.yaml)                                                  | [checkpoint](https://github.com/karimknaebel/point2vec/releases/download/paper/pre_point2vec-epoch.799-step.64800.ckpt)                          |
+| point2vec pre-trained        | ShapeNet     | -                                   | [config](configs/pretraining/shapenet.yaml)                                                  | [checkpoint](https://github.com/karimknaebel/point2vec/releases/download/paper/pre_point2vec-epoch.799-step.64800.ckpt)                          |
 | Classification fine-tuned    | ModelNet40   | **94.65** / **94.77** (OA / Voting) | [A](configs/classification/modelnet40.yaml) & [B](configs/classification/_pretrained.yaml)   | [checkpoint](https://github.com/karimknaebel/point2vec/releases/download/paper/fine_modelnet40-epoch.125-step.38682-val_acc.0.9465.ckpt)         |
 | Classification fine-tuned    | ScanObjectNN | **87.47** (OA)                      | [A](configs/classification/scanobjectnn.yaml) & [B](configs/classification/_pretrained.yaml) | [checkpoint](https://github.com/karimknaebel/point2vec/releases/download/paper/fine_scanobjectnn-epoch.146-step.52332-val_acc.0.8747.ckpt)       |
 | Part segmentation fine-tuned | ShapeNetPart | **84.59** (Cat. mIoU)               | [config](configs/part_segmentation/shapenetpart.yaml)                                        | [checkpoint](https://github.com/karimknaebel/point2vec/releases/download/paper/fine_shapenetpart-epoch.288-step.252586-val_cat_miou.0.8459.ckpt) |
@@ -52,7 +52,7 @@ To obtain comparable results on ModelNet40, you will likely need to experiment w
 However, if you can precisely replicate our test environment, including installing CUDA 11.6, cuDNN 8.4.0, Python 3.10.4, and the dependencies listed in the `requirements.txt` file, as well as using a Volta GPU (e.g. Nvidia V100), you should be able to replicate our experiments exactly.
 Using our _exact_ environment is necessary to ensure that you obtain the same random state during training, as a seed alone does _not_ guarantee reproducibility across different environments.
 
-### Point2vec pre-training on ShapeNet
+### point2vec pre-training on ShapeNet
 
 ```bash
 ./scripts/pretraining_shapenet.bash --data.in_memory true
@@ -180,11 +180,11 @@ Both a random initialization and data2vec&ndash;pc pre-training show a fairly st
 
 If you use point2vec in your research, please use the following BibTeX entry.
 
-```
-@inproceedings{abouzeid2023point2vec,
-  title={Point2Vec for Self-Supervised Representation Learning on Point Clouds},
-  author={Knaebel, Karim and Schult, Jonas and Hermans, Alexander and Leibe, Bastian},
-  journal={German Conference on Pattern Recognition (GCPR)},
-  year={2023},
+```bibtex
+@inproceedings{knaebel2023point2vec,
+    title     = {point2vec for Self-Supervised Representation Learning on Point Clouds},
+    author    = {Knaebel, Karim and Schult, Jonas and Hermans, Alexander and Leibe, Bastian},
+    year      = 2023,
+    booktitle = {German Conference on Pattern Recognition (GCPR)},
 }
 ```

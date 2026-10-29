@@ -10,7 +10,7 @@
   <title>point2vec</title>
   <link rel="apple-touch-icon" sizes="180x180" href="./static/apple-touch-icon.png" />
   <link rel="icon" type="image/x-icon" href="./static/favicon.ico" />
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" />
   <link rel="stylesheet" href="./static/css/index.css" />
@@ -18,19 +18,18 @@
 
 <body>
   <header>
-    <h1>point2vec</h1>
-    <p class="subtitle">Self-Supervised Representation Learning on Point Clouds</p>
+    <h1>point2vec<span class="subtitle">Self-Supervised Representation Learning on Point Clouds</span></h1>
     <p class="venue">GCPR 2023<br />T4V Workshop @ CVPR 2023</p>
     <div class="authors">
-      <span><a href="https://karimknaebel.com">Karim Knaebel</a>*</span>
-      <span><a href="https://jonasschult.github.io/">Jonas Schult</a>*</span>
+      <span><a href="https://karimknaebel.com">Karim Knaebel</a><sup>*</sup></span>
+      <span><a href="https://jonasschult.github.io/">Jonas Schult</a><sup>*</sup></span>
       <span><a href="https://www.vision.rwth-aachen.de/person/10/">Alexander Hermans</a></span>
       <span><a href="https://www.vision.rwth-aachen.de/person/1/">Bastian Leibe</a></span>
     </div>
     <p class="affiliation">RWTH Aachen University</p>
-    <p>* equal contribution</p>
-    <nav aria-label="Publication links">
-      <a href="https://karimknaebel.com/papers/point2vec.pdf">
+    <p class="contribution">* equal contribution</p>
+    <nav class="publication-links" aria-label="Publication links">
+      <a class="publication-link-primary" href="https://karimknaebel.com/papers/point2vec.pdf">
         <span class="icon" aria-hidden="true"><i class="fas fa-file-pdf"></i></span>
         Paper
       </a>
@@ -60,66 +59,58 @@
     <section class="abstract">
       <h2>Abstract</h2>
       <p>
-        Recently, the self-supervised learning framework data2vec has
-        shown inspiring performance for various modalities using a masked
-        student-teacher approach. However, it remains open whether such a
-        framework generalizes to the unique challenges of 3D point clouds.
-        To answer this question, we extend data2vec to the point cloud
-        domain and report encouraging results on several downstream tasks.
-        In an in-depth analysis, we discover that the leakage of
-        positional information reveals the overall object shape to the
-        student even under heavy masking and thus hampers data2vec to
-        learn strong representations for point clouds. We address this
-        3D-specific shortcoming by proposing point2vec, which unleashes
-        the full potential of data2vec-like pre-training on point clouds.
-        Our experiments show that point2vec outperforms other
-        self-supervised methods on shape classification and few-shot
-        learning on ModelNet40 and ScanObjectNN, while achieving
-        competitive results on part segmentation on ShapeNetParts. These
-        results suggest that the learned representations are strong and
-        transferable, highlighting point2vec as a promising direction for
-        self-supervised learning of point cloud representations.
+        We present point2vec, a self-supervised method for learning point cloud representations through masked
+        prediction of a teacher network's latent features. Building on data2vec, we investigate a limitation of
+        applying this approach to point clouds: positional information associated with masked patches reveals
+        the overall object shape to the student, weakening the learning task even under heavy masking.
+        point2vec addresses this issue by passing only visible patches to the student encoder and introducing
+        a shallow decoder to predict representations for masked patches. The teacher processes the complete
+        point cloud to provide contextualized training targets. These targets capture global context through
+        the teacher's self-attention, providing supervision beyond the local geometry of individual patches.
+        This design conceals masked-patch positions from the student and reduces its computational cost during
+        pre-training. Our ablations show that the decoder alone provides only part of the improvement;
+        concealing positional information is key. After pre-training on ShapeNet, point2vec outperforms the
+        evaluated self-supervised baselines on shape classification on ModelNet40 and ScanObjectNN and few-shot
+        classification on ModelNet40, while achieving competitive part segmentation results on ShapeNetPart.
       </p>
     </section>
 
     <section>
       <h2>Visualization of Learned Representations</h2>
-      <img src="./static/images/representations.png"
-        alt="PCA projections of point cloud representations from random initialization, data2vec–pc, and point2vec." />
-      <p>
-        We use PCA to project the learned representations into RGB space. Both a random initialization and
-        data2vec–pc pre-training show a fairly strong positional bias, whereas point2vec exhibits a stronger
-        semantic grouping without being trained on downstream dense prediction tasks.
-      </p>
-    </section>
-
-    <section>
-      <h2>Paper</h2>
-      <a href="https://karimknaebel.com/papers/point2vec.pdf">
-        <img src="./static/images/paper_preview.jpg" alt="Preview of the point2vec paper. Read the PDF." />
-      </a>
+      <figure class="paper-figure">
+        <img src="./static/images/representations.png" loading="lazy" decoding="async"
+          alt="PCA projections of point cloud representations from random initialization, data2vec–pc, and point2vec." />
+        <figcaption>
+          We use PCA to project the learned representations into RGB space. Both a random initialization and
+          data2vec–pc pre-training show a fairly strong positional bias, whereas point2vec exhibits a stronger
+          semantic grouping without being trained on downstream dense prediction tasks.
+        </figcaption>
+      </figure>
     </section>
 
     <section id="BibTeX">
       <h2>BibTeX</h2>
       <div class="bibtex-wrapper">
+        <div class="bibtex-header">
+          <span>point2vec.bib</span>
+          <button type="button" class="copy-button" id="bibtex-copy-button" aria-label="Copy BibTeX">
+            <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <g class="copy-icon">
+                <rect x="9" y="9" width="13" height="13" rx="2" />
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+              </g>
+              <path class="check-icon" d="m5 12 4 4L19 6" />
+            </svg>
+            <span id="bibtex-copy-label" aria-live="polite">Copy</span>
+          </button>
+        </div>
 <pre><code id="bibtex">@inproceedings{knaebel2023point2vec,
     title     = {Point2Vec for Self-Supervised Representation Learning on Point Clouds},
     author    = {Knaebel, Karim and Schult, Jonas and Hermans, Alexander and Leibe, Bastian},
     year      = 2023,
     booktitle = {German Conference on Pattern Recognition (GCPR)},
 }</code></pre>
-        <button type="button" class="copy-button" id="bibtex-copy-button" aria-label="Copy BibTeX">
-          <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <g class="copy-icon">
-              <rect x="9" y="9" width="13" height="13" rx="2" />
-              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
-            </g>
-            <path class="check-icon" d="m5 12 4 4L19 6" />
-          </svg>
-          <span id="bibtex-copy-label" aria-live="polite">Copy</span>
-        </button>
       </div>
     </section>
   </main>
@@ -137,12 +128,14 @@
   </script>
 
   <footer>
-    <p>
-      This website is licensed under a
-      <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons
-        Attribution-ShareAlike 4.0 International License</a>. It is based on the
-      <a href="https://nerfies.github.io/">Nerfies website</a>.
-    </p>
+    <div class="footer-links">
+      <p>point2vec · GCPR 2023</p>
+      <nav aria-label="Footer">
+        <a href="https://karimknaebel.com/papers/point2vec.pdf">Paper</a>
+        <a href="https://github.com/karimknaebel/point2vec">Code</a>
+        <a href="https://karimknaebel.com">Contact</a>
+      </nav>
+    </div>
   </footer>
 </body>
 
